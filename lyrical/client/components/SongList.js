@@ -6,9 +6,13 @@ class SongList extends Component {
   render() {
     if (this.props.data.loading) return <div>Loading...</div>;
     return (
-      <ul>
+      <ul className="collection">
         {this.props.data.songs.map(({ title, id }) => {
-          return <li key={id}>{title}</li>;
+          return (
+            <li key={id} className="collection-item">
+              {title}
+            </li>
+          );
         })}
       </ul>
     );
