@@ -19,9 +19,8 @@ const SongList = ({ data, mutate }) => {
                   mutate({
                     variables: {
                       id
-                    },
-                    refetchQueries: [{ query, variables: {} }]
-                  });
+                    }
+                  }).then(() => data.refetch());
                 }}
                 className="material-icons"
               >
