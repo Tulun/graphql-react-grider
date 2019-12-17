@@ -12,13 +12,18 @@ class SongCreate extends Component {
 
   onSubmit(event) {
     event.preventDefault();
+    this.props.mutate({
+      variables: {
+        title: this.state.title
+      }
+    });
   }
 
   render() {
     return (
       <div>
         <h3>Create a new Song</h3>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <label>Song Title:</label>
           <input
             onChange={event => this.setState({ title: event.target.value })}
