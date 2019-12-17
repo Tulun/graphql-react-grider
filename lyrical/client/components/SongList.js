@@ -2,8 +2,10 @@ import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import { Link } from "react-router";
+import query from "../queries/fetchSongs";
+import mutation from "../mutations/deleteSong";
 
-const SongList = ({ data }) => {
+const SongList = ({ data, mutate }) => {
   if (data.loading) return <div>Loading...</div>;
   return (
     <div>
@@ -12,6 +14,19 @@ const SongList = ({ data }) => {
           return (
             <li key={id} className="collection-item">
               {title}
+              <i
+                onClick={() => {
+                  mutate({
+                    variables: {
+                      id
+                    },
+                    refetchQueries: [{ query, variables: {} }]
+                  });
+                }}
+                className="material-icons"
+              >
+                delete
+              </i>
             </li>
           );
         })}
@@ -23,13 +38,4 @@ const SongList = ({ data }) => {
   );
 };
 
-const query = gql`
-  {
-    songs {
-      title
-      id
-    }
-  }
-`;
-
-export default graphql(query)(SongList);
+export default graphql(mutation)(graphql(query)(SongList));
