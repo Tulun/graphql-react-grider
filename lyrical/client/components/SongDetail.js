@@ -13,7 +13,7 @@ const SongDetail = ({ data }) => {
     <div>
       <Link to="/">Back to List</Link>
       <h3>{song.title}</h3>
-      <LyricList />
+      <LyricList lyrics={song.lyrics} />
       <LyricCreate songId={song.id} />
     </div>
   );
